@@ -1,8 +1,8 @@
 
 var names = [];
-var details = [] ; 
-var dueDates = [] ; 
-var times = [] ; 
+var details = []; 
+var dueDates = []; 
+var times = []; 
 
 function submitForm() {
 	names.push(document.getElementById("TaskName"));

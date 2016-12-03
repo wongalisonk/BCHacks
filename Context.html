@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Context</title>
+    <script src="Context.js"></script>
+  </head>
+  <body>
+	<h1>GET TO WORK</h1>
+	
+	<script>
+		object.onload=function(){
+			alert(); 
+		};
+		
+    </script>
+	
+	<form id="TaskForm">
+		Task Name : 
+		<input type="text" name="TaskName"><br>
+		Details   : 
+		<input type="text" name="Detail"><br>
+		Due Date   : 
+		<input type="datetime-local" name="Date"><br>
+		Time Needed: 
+		<input type="Time" name="TimeNeeded"><br>
+		<P></P>
+		<input type="button" onclick="submitForm()" value="Add Task">
+	</form>
+    
+	<P></P>
+	<P></P>
+	
+	<div id="List" style="overflow:scroll; height:400px; width:400px;">
+		<p id="insert"></p>
+	</div>
+	
+  </body>
+</html>

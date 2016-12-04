@@ -1,43 +1,44 @@
 
 var Name;
 var Details ; 
-var DueDate ; 
-var Time ; 
+var DueDate ;  
 
 var Tasks = [];
 var current ;
+var count = 0; 
+
+
 
 function Task(TaskName,TaskDetails,TaskDueDate,TaskTime){
 	this.Name = TaskName ; 
 	this.Details = TaskDetails ; 
 	this.DueDate = TaskDueDate ; 
-	this.Time = TaskTime ; 
 }; 
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() { 
     var link = document.getElementById('submitForm');
     // onClick's logic below:
     link.addEventListener('click', function() {
 		
-		Tasks.push(new Task(document.getElementById("TaskName").value,document.getElementById("Detail").value,document.getElementById("Date").value,document.getElementById("TimeNeeded").value)); 
+		Tasks.push(new Task(document.getElementById("TaskName").value,document.getElementById("Detail").value,document.getElementById("Date").value)); 
 		
 		current = Tasks.length -1 ; 
 		Refresh(); 
+		
+		count++; 
 
-		var notification = {
-			type: 'basic',
-			title: 'New task "' + Tasks[current].Name + '" added',
-			message: 'You now have ' + Tasks.length + ' task(s)',
-			iconUrl: 'icon.png'
-		};
-
-		chrome.notifications.create('basic', notification);
-
-		function clear() {
-			chrome.notifications.clear('basic');
-		};
-
-		chrome.notifications.onClicked.addListener(clear);
+		chrome.notifications.create(
+			'Basic Notification', {
+				type: 'basic',
+				iconUrl: 'icon.png',
+				title: 'New task added!',
+				message: "You now have " + count + " task(s)"
+			}
+		);
     });
 });
 
@@ -46,31 +47,17 @@ document.addEventListener('DOMContentLoaded', function() {
 	 
     // onClick's logic below:
     link.addEventListener('click', function() {		
+		count--;
 
-    	var notification = {
-    		type: 'image',
-    		title: '"' + Tasks[current].Name + '" is such complete!',
-    		message: 'Much wow, good jerb',
-    		iconUrl: 'icon.png',
-    		imageUrl: 'doge.jpg'
-    	};
-
-    	chrome.notifications.create('image', notification);
-
-    	function clear() {
-    		chrome.notifications.clear('image');
-    	};
-
-    	chrome.notifications.onClicked.addListener(clear);
-		// chrome.notifications.create( 
-		// 	'Image Notification', {
-		// 	  type: "image",
-		// 	  title: Tasks[current].Name + " is such complete!",
-		// 	  message: "Much wow, good jerb",
-		// 	  iconUrl: "icon.png",
-		// 	  imageUrl: "doge.jpg"
-		// 	}
-		// );	
+		chrome.notifications.create( 
+			'Image Notification', {
+			  type: "image",
+			  title: Tasks[current].Name + " is such complete!",
+			  message: "Much wow, good jerb",
+			  iconUrl: "icon.png",
+			  imageUrl: "doge.jpg"
+			}
+		);	
 
 		Tasks.splice(current, 1) 
 		current = Tasks.length - 1;
@@ -111,12 +98,13 @@ function Refresh(){
 			document.querySelector('.Nameresults').innerHTML = "";
 			document.querySelector('.Detailresults').innerHTML = "";
 			document.querySelector('.Dateresults').innerHTML = "";
-			document.querySelector('.Timeresults').innerHTML = "";
 		};
 		
 		
 		document.querySelector('.Nameresults').innerHTML = Tasks[current].Name;
 		document.querySelector('.Detailresults').innerHTML = Tasks[current].Details;
 		document.querySelector('.Dateresults').innerHTML = Tasks[current].DueDate;
-		document.querySelector('.Timeresults').innerHTML = Tasks[current].Time;
+		
+		
 }; 
+

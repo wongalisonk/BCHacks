@@ -6,6 +6,7 @@ var Time ;
 
 var Tasks = [];
 var current ; 
+var count = 0;
 
 function Task(TaskName,TaskDetails,TaskDueDate,TaskTime){
 	this.Name = TaskName ; 
@@ -24,7 +25,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		current = Tasks.length -1 ; 
 		Refresh(); 
 		
-		alert("New Task Added"); 
+		count++;
+		chrome.notifications.create(
+		'Basic Notification', {
+			type: 'basic',
+			iconUrl: 'icon.png',
+			title: 'Boop',
+			message: "You now have " + count + " task(s)"
+		}
+	);
     });
 });
 

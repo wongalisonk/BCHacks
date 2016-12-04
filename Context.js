@@ -5,7 +5,6 @@ var DueDate ;
 
 var Tasks = [];
 var current ;
-var count = 0; 
 
 
 
@@ -29,16 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
 		current = Tasks.length -1 ; 
 		Refresh(); 
 		
-		count++; 
+		var notification = {
+			type: 'basic',
+			title: 'New task "' + Tasks[current].Name + '" added',
+			message: 'You now have ' + Tasks.length + ' task(s)',
+			iconUrl: 'icon.png'
+		};
 
-		chrome.notifications.create(
-			'Basic Notification', {
-				type: 'basic',
-				iconUrl: 'icon.png',
-				title: 'New task added!',
-				message: "You now have " + count + " task(s)"
-			}
-		);
+		chrome.notifications.create('basic', notification);
+
+		function clear() {
+			chrome.notifications.clear('basic');
+		};
+
+		chrome.notifications.onClicked.addListener(clear);
     });
 });
 
@@ -47,17 +50,22 @@ document.addEventListener('DOMContentLoaded', function() {
 	 
     // onClick's logic below:
     link.addEventListener('click', function() {		
-		count--;
 
-		chrome.notifications.create( 
-			'Image Notification', {
-			  type: "image",
-			  title: Tasks[current].Name + " is such complete!",
-			  message: "Much wow, good jerb",
-			  iconUrl: "icon.png",
-			  imageUrl: "doge.jpg"
-			}
-		);	
+		var notification = {
+			type: 'image',
+			title: '"' + Tasks[current].Name + '" is such complete!',
+			message: 'Much wow, good jerb',
+			iconUrl: 'icon.png',
+			imageUrl: 'doge.jpg'
+		};
+
+		chrome.notifications.create('image', notification);
+
+		function clear() {
+			chrome.notifications.clear('image');
+		};
+
+		chrome.notifications.onClicked.addListener(clear);	
 
 		Tasks.splice(current, 1) 
 		current = Tasks.length - 1;

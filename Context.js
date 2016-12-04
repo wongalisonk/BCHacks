@@ -43,18 +43,21 @@ document.addEventListener('DOMContentLoaded', function() {
 	 
     // onClick's logic below:
     link.addEventListener('click', function() {		
-		Tasks.splice(current, 1) 
-		current = Tasks.length - 1;
-		Refresh(); 
+		count--;
+
 		chrome.notifications.create( 
 			'Image Notification', {
 			  type: "image",
-			  title: "Such complete!",
+			  title: Tasks[current].Name + " is such complete!",
 			  message: "Much wow, good jerb",
 			  iconUrl: "icon.png",
 			  imageUrl: "doge.jpg"
 			}
-		);			
+		);	
+
+		Tasks.splice(current, 1) 
+		current = Tasks.length - 1;
+		Refresh(); 		
     });
 });
 

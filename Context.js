@@ -16,8 +16,6 @@ function Task(TaskName,TaskDetails,TaskDueDate,TaskTime){
 
 
 
-
-
 document.addEventListener('DOMContentLoaded', function() { 
     var link = document.getElementById('submitForm');
     // onClick's logic below:

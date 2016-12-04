@@ -5,7 +5,8 @@ var DueDate ;
 var Time ; 
 
 var Tasks = [];
-var current ; 
+var current ;
+var count = 0; 
 
 function Task(TaskName,TaskDetails,TaskDueDate,TaskTime){
 	this.Name = TaskName ; 
@@ -24,7 +25,16 @@ document.addEventListener('DOMContentLoaded', function() {
 		current = Tasks.length -1 ; 
 		Refresh(); 
 		
-		alert("New Task Added"); 
+		count++; 
+
+		chrome.notifications.create(
+			'Basic Notification', {
+				type: 'basic',
+				iconUrl: 'icon.png',
+				title: 'New task added!',
+				message: "You now have " + count + " task(s)"
+			}
+		);
     });
 });
 
@@ -36,7 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		Tasks.splice(current, 1) 
 		current = Tasks.length - 1;
 		Refresh(); 
-		alert("Good Job!"); 
+		chrome.notifications.create( 
+			'Image Notification', {
+			  type: "image",
+			  title: "Such complete!",
+			  message: "Much wow, good jerb",
+			  iconUrl: "icon.png",
+			  imageUrl: "doge.jpg"
+			}
+		);			
     });
 });
 

@@ -1,22 +1,50 @@
 
-var names = [];
-var details = []; 
-var dueDates = []; 
-var times = []; 
+var Name;
+var Details ; 
+var DueDate ; 
+var Time ; 
 
-document.addEventListener('DOMContentLoaded', function() {
-	var button = document.getElementById('button');
-	button.addEventListener('click', function() {
-		submitForm();
-	});
+var Tasks = [];
+var current ; 
+
+function Task(TaskName,TaskDetails,TaskDueDate,TaskTime){
+	this.Name = TaskName ; 
+	this.Details = TaskDetails ; 
+	this.DueDate = TaskDueDate ; 
+	this.Time = TaskTime ; 
+}; 
+
+document.addEventListener('DOMContentLoaded', function() { 
+    var link = document.getElementById('submitForm');
+    // onClick's logic below:
+    link.addEventListener('click', function() {
+		
+		Tasks.push(new Task(document.getElementById("TaskName").value,document.getElementById("Detail").value,document.getElementById("Date").value,document.getElementById("TimeNeeded").value)); 
+		
+		current = Tasks.length -1 ; 
+		Refresh(); 
+		
+		alert("New Task Added"); 
+    });
 });
 
-function submitForm() {
-	alert();
-	names.push(document.getElementById("TaskName"));
-	details.push(document.getElementById("Detail"));
-	dueDates.push(document.getElementById("Date"));
-	times.push(document.getElementById("TimeNeeded"));
+document.addEventListener('DOMContentLoaded', function() { 
+    var link = document.getElementById('DeleteTasks');
+    // onClick's logic below:
+    link.addEventListener('click', function() { 
+		Tasks.splice(index, current); 
+		alert(); 
+		current = Tasks.length - 1;
+		if(current < 0){
+			current = 0; 
+		}
+		alert("Good Job!"); 
+    });
+});
 
-	document.getElementById("insert").innerHTML = names.toString;
-};
+function Refresh(){
+		document.querySelector('.Nameresults').innerHTML = Tasks[current].Name;
+		document.querySelector('.Detailresults').innerHTML = Tasks[current].Details;
+		document.querySelector('.Dateresults').innerHTML = Tasks[current].DueDate;
+		document.querySelector('.Timeresults').innerHTML = Tasks[current].Time;
+}; 

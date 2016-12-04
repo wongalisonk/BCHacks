@@ -6,25 +6,44 @@
   </head>
   <body>
 	<h1>GET TO WORK</h1>
+	
+	
+	
 	<form id="TaskForm">
 		Task Name : 
-		<input type="text" name="TaskName"><br>
+		<input type="text" id="TaskName"><br>
 		Details   : 
-		<input type="text" name="Detail"><br>
+		<input type="text" id="Detail"><br>
 		Due Date   : 
-		<input type="datetime-local" name="Date"><br>
+		<input type="datetime-local" id="Date"><br>
 		Time Needed: 
-		<input type="Time" name="TimeNeeded"><br>
+		<input type="Time" id="TimeNeeded"><br>
 		<P></P>
-		<input type="button" id="button" value="Add Task">
+		<input type="button" id="submitForm" value="Add Task">
+		__________________________________________ <br><br>
 	</form>
     
 	<P></P>
 	<P></P>
 	
-	<div id="List" style="overflow:scroll; height:400px; width:400px;">
-		<p id="insert"></p>
-	</div>
+	
+			Task Name :
+			<div class="Nameresults"></div>
+			Details : 
+			<div class="Detailresults"></div>
+			Due Date : 
+			<div class="Dateresults"></div>
+			Time Needed :
+			<div class="Timeresults"></div><br><br>
+			<input type="button" id="DeleteTasks" value="Done!">
+	  
+	<P></P>
+	  ___________________________________________ <P></P> 
+	<input type="button" id="Previous" value="Previous">
+	.................................
+	<input type="button" id="Next" value="Next">
+	
+	
 	
   </body>
 </html>
